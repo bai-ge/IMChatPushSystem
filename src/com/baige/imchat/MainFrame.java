@@ -18,6 +18,7 @@ import javax.swing.text.Document;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
+import com.baige.ApplicationConfig;
 import com.baige.callback.PushCallback;
 import com.baige.data.entity.Candidate;
 import org.jvnet.substance.SubstanceLookAndFeel;
@@ -643,16 +644,16 @@ public class MainFrame extends JFrame {
 										pushCallback.setTimeout(8000);
 										CallbackManager.getInstance().put(pushCallback);
 										
-										ConnectedByUDP connectedByUDP = netServerManager.getUDPConnectorByAddress("120.78.148.180", 12059);
+										ConnectedByUDP connectedByUDP = netServerManager.getUDPConnectorByAddress(ApplicationConfig.mainServerIp, 12059);
 										connectedByUDP.sendString(msg);
 										
-										connectedByUDP = netServerManager.getUDPConnectorByAddress("39.108.74.14", 12059);
+										connectedByUDP = netServerManager.getUDPConnectorByAddress(ApplicationConfig.secondaryServerIp, 12059);
 										connectedByUDP.sendString(msg);
 										
 										//TODO 默认地址
-//										serverNet.sendMessage("120.78.148.180", 12059, MessageManager.udpLogin(serverNet.getid()));
+//										serverNet.sendMessage(ApplicationConfig.mainServerIp, 12059, MessageManager.udpLogin(serverNet.getid()));
 //										
-//										serverNet.sendMessage("39.108.74.14", 12059, MessageManager.udpLogin(serverNet.getid()));
+//										serverNet.sendMessage(ApplicationConfig.secondaryServerIp, 12059, MessageManager.udpLogin(serverNet.getid()));
 //										
 //										result.append("发送udp到 120.78.148.* 成功\n");
 //										result.append("发送udp到 39.108.74.* 成功\n");

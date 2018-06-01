@@ -39,7 +39,7 @@ public class Daemon {
         } else {
             help();
 //            clientAgent();
-            testInput();
+            clientAgent();
         }
     }
 
@@ -63,61 +63,9 @@ public class Daemon {
         System.out.println(stringBuffer.toString());
     }
 
-    private static void clientAgent() {
 
-        try {
-            SocketAddress address = new InetSocketAddress(InetAddress.getLocalHost(), 12058);
-            Socket socket = new Socket();
-            socket.connect(address, 8000);
-            System.out.println("connect success");
-            Scanner sc = new Scanner(System.in);
-            System.out.print(">");
-            String input = sc.nextLine();
-            System.out.println(input);
-            while (!input.equals("exit")) {
-                if (Tools.isEmpty(input)) {
-                    System.out.print(">");
-                    continue;
-                }
-                String[] args = input.split(" ");
-                StringBuffer buffer = new StringBuffer();
-                buffer.append(args[0]);
-                for (int i = 1; i < args.length; i++) {
-                    buffer.append("#" + args[i]);
-                }
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put(Parm.CMD, buffer.toString());
-                String send = jsonObject.toString() + "\r\n";
-                socket.getOutputStream().write(send.getBytes());
-                socket.getOutputStream().flush();
-                System.out.println("发送数据" + send);
-                //读取相应
-                BufferedReader reader = null;
-                StringBuffer response = new StringBuffer();
-                reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                String lines;
-                while ((lines = reader.readLine()) != null) {
-                    lines = new String(lines.getBytes(), "utf-8");
-                    if (lines.equals("end")) {
-                        break;
-                    }
-                    response.append(lines);
-                    System.out.println(lines);
-                }
-                System.out.println(response.toString());
-                System.out.print(">");
-            }
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        System.out.println("close ");
-    }
 
-    protected static void testInput() {
+    protected static void clientAgent() {
         try {
             SocketAddress address = new InetSocketAddress(InetAddress.getLocalHost(), 12058);
             Socket socket = new Socket();

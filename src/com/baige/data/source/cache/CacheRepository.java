@@ -7,23 +7,18 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream.PutField;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.UUID;
 
-import javax.swing.JComboBox.KeySelectionManager;
-import javax.swing.text.html.parser.Entity;
 
+import com.baige.ApplicationConfig;
 import com.baige.common.Parm;
-import org.jvnet.substance.utils.params.PropertiesFileParamReader;
 
 import com.baige.data.entity.Candidate;
 import com.baige.util.FileUtil;
@@ -57,8 +52,8 @@ public class CacheRepository {
 		put("cmd", "client");
 		put("cmd", "udp");
 		put("cmd", "ptp");
-		put("ip", "120.78.148.180");
-		put("ip", "39.180.74.14");
+		put("ip", ApplicationConfig.mainServerIp);
+		put("ip", ApplicationConfig.secondaryServerIp);
 		put("port", "12056");
 		put("port", "12059");
 	}

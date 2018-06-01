@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.baige.ApplicationConfig;
 import com.baige.common.Parm;
 import com.baige.connect.msg.*;
 import com.baige.linux.CommonProxy;
@@ -385,10 +386,10 @@ public class NetServerManager {
 	        String msg = MessageManager.udpTest(cacheRepository.getDeviceId(), localIp, localPort);
 	        ConnectedByUDP connectedByUDP;
 	        
-	        connectedByUDP = getUDPConnectorByAddress("120.78.148.180", 12059);
+	        connectedByUDP = getUDPConnectorByAddress(ApplicationConfig.mainServerIp, 12059);
 	        connectedByUDP.sendString(msg);
 
-	        connectedByUDP = getUDPConnectorByAddress("39.180.74.14", 12059);
+	        connectedByUDP = getUDPConnectorByAddress(ApplicationConfig.secondaryServerIp, 12059);
 	        connectedByUDP.sendString(msg);
 	    }
 	    
@@ -396,10 +397,10 @@ public class NetServerManager {
 	    	
 	        ConnectedByUDP connectedByUDP;
 	        
-	        connectedByUDP = getUDPConnectorByAddress("120.78.148.180", 12059);
+	        connectedByUDP = getUDPConnectorByAddress(ApplicationConfig.mainServerIp, 12059);
 	        connectedByUDP.sendString(msg);
 
-	        connectedByUDP = getUDPConnectorByAddress("39.180.74.14", 12059);
+	        connectedByUDP = getUDPConnectorByAddress(ApplicationConfig.secondaryServerIp, 12059);
 	        connectedByUDP.sendString(msg);
 	    }
 

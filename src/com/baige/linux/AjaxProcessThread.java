@@ -16,14 +16,17 @@ import java.io.IOException;
 import java.io.PipedOutputStream;
 import java.util.List;
 
-public class AjaxProcessThread extends Thread {
-    protected String[] args;
-    protected PipedOutputStream out;
+public class AjaxProcessThread extends AjaxPrecessAbstract {
+
 
     private String RegexClientCmd = "^client\\s-l$";
     private String RegexUdpCmd = "(udp\\s-t\\s(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)[:\\s](6553[0-5]|655[0-2][0-9]|65[0-4][0-9]{2}|6[0-4][0-9]{3}|[1-5][0-9]{4}|[1-9][0-9]{0,3}))|(udp\\s-t)";
 
-    private boolean canExecute() {
+    public AjaxProcessThread(PipedOutputStream out, String[] args) {
+        super(out, args);
+    }
+
+    protected boolean canExecute() {
         if (args == null || args.length <= 0) {
             return false;
         }
@@ -50,10 +53,6 @@ public class AjaxProcessThread extends Thread {
         return false;
     }
 
-    public AjaxProcessThread(PipedOutputStream out, String[] args) {
-        this.args = args;
-        this.out = out;
-    }
 
 
     @Override
@@ -64,6 +63,7 @@ public class AjaxProcessThread extends Thread {
             try {
                 out.write("未知命令！".getBytes());
                 out.close();
+                return;
             } catch (IOException e) {
                 e.printStackTrace();
             }
