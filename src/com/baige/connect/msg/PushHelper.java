@@ -86,11 +86,11 @@ public class PushHelper {
 						if(baseConnector != null){
 							baseConnector.sendPacket(packet);
 							if(connector instanceof ConnectedByTCP){
-								((ConnectedByTCP) connector).read(200);
+								((ConnectedByTCP) connector).write(200);
 							}
 						}else{
 							if(connector instanceof ConnectedByTCP){
-								((ConnectedByTCP) connector).read(500);
+								((ConnectedByTCP) connector).write(500);
 							}
 						}
 					}

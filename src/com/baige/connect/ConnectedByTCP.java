@@ -5,6 +5,7 @@ package com.baige.connect;
 
 import com.baige.connect.msg.PushHelper;
 import com.baige.util.Log;
+import com.baige.util.LogHelper;
 import com.baige.util.Loggerx;
 import com.baige.util.Tools;
 
@@ -220,7 +221,7 @@ public class ConnectedByTCP extends BaseConnector {
         return this.socketInputStream;
     }
     
-    public void read(int res){
+    public void write(int res){
     	if(isConnected()){
     		try {
 				getRunningSocket().getOutputStream().write(Tools.toByte(res));
@@ -865,6 +866,7 @@ public class ConnectedByTCP extends BaseConnector {
                     }else if((h & 0xFF) == SocketPacket.SIGN_END){
                         byte [] remainBuf = new byte[3];
                         int size = self.getSocketInputStream().read(remainBuf);
+                        LogHelper.getInstance().debug(self, "心跳包"+size);
                         if (remainBuf[0] == SocketPacket.SIGN_END
                                 && remainBuf[1] == SocketPacket.SIGN_END
                                 && remainBuf[2] == SocketPacket.SIGN_END) {

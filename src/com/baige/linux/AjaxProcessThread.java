@@ -1,5 +1,6 @@
 package com.baige.linux;
 
+import com.baige.ApplicationConfig;
 import com.baige.callback.CallbackManager;
 import com.baige.callback.PushCallback;
 import com.baige.connect.ConnectedByUDP;
@@ -196,10 +197,10 @@ public class AjaxProcessThread extends AjaxPrecessAbstract {
                         pushCallback.setTimeout(8000);
                         CallbackManager.getInstance().put(pushCallback);
 
-                        ConnectedByUDP connectedByUDP = netServerManager.getUDPConnectorByAddress("120.78.148.180", 12059);
+                        ConnectedByUDP connectedByUDP = netServerManager.getUDPConnectorByAddress(ApplicationConfig.mainServerIp, 12059);
                         connectedByUDP.sendString(msg);
 
-                        connectedByUDP = netServerManager.getUDPConnectorByAddress("39.108.74.14", 12059);
+                        connectedByUDP = netServerManager.getUDPConnectorByAddress(ApplicationConfig.secondaryServerIp, 12059);
                         connectedByUDP.sendString(msg);
 
                         //TODO 默认地址
